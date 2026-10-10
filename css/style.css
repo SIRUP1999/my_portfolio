@@ -1,0 +1,636 @@
+/* =========================================================
+   Albert Ofori portfolio  |  style.css
+   Save this as: css/style.css
+   Link it in <head>:  <link rel="stylesheet" href="css/style.css">
+
+   Map to your course:
+   1 Tokens ........ C9  custom properties, dark/light mode
+   2 Base .......... C0-C4  reset, box-sizing, typography
+   3 Layout ........ C2, C5, C6, C7  box model, flex, grid
+   4 Sections ...... C3, C6, C7  cards, chips, timeline, form
+   5 Motion ........ C10  one entrance + reduced motion
+   6 Accessibility . C12  focus rings, skip link
+   ========================================================= */
+
+/* ---------- 1. DESIGN TOKENS ---------- */
+:root {
+  color-scheme: dark light;
+
+  /* Dark is the default (matches your theme-color #0f172a) */
+  --bg: #0f172a;
+  --surface: #172036;
+  --surface-2: #1f2b47;
+  --text: #e9edf6;
+  --muted: #a3afc7;
+  --line: #2b3858;
+  --accent: #f2b33d; /* gold: fills and buttons */
+  --accent-text: #f2b33d; /* gold used as text color */
+  --accent-ink: #1b1403; /* dark text on a gold button */
+  --danger: #ff8a8a;
+
+  --font-body:
+    system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display:
+    "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia,
+    serif;
+
+  --radius-s: 10px;
+  --radius-m: 14px;
+  --radius-l: 20px;
+
+  --width: 70rem; /* max content width */
+  --gutter: max(
+    1rem,
+    calc((100% - var(--width)) / 2)
+  ); /* side space for header/footer */
+  --space-section: clamp(3.5rem, 8vw, 6rem);
+}
+
+/* Light mode follows the visitor's device setting */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f4f6fb;
+    --surface: #ffffff;
+    --surface-2: #e9eef7;
+    --text: #0f172a;
+    --muted: #51607c;
+    --line: #d8e0ee;
+    --accent-text: #8a5a00; /* darker gold so text stays readable */
+    --danger: #b42318;
+  }
+}
+
+/* ---------- 2. BASE ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 1.0625rem/1.65 var(--font-body);
+}
+
+h1,
+h2,
+h3,
+p,
+ul,
+ol,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+/* every list in this page is a UI list (nav, chips, timeline), so no bullets */
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+
+img {
+  display: block; /* removes the gap under images */
+  max-width: 100%;
+  height: auto;
+  background: var(--surface-2); /* shows a soft box if an image is missing */
+  color: var(--muted);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  text-decoration-thickness: 3px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.2vw, 2.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+h2::after {
+  /* short gold rule under every section title */
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 3px;
+  margin-top: 0.6rem;
+  background: var(--accent);
+  border-radius: 2px;
+}
+h3 {
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+/* Hides the empty <p> the browser creates around your <dl> (see note about HTML) */
+p:empty {
+  display: none;
+}
+
+/* ---------- 3. LAYOUT ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 1.5rem;
+  padding-block: 0.75rem;
+  padding-inline: var(--gutter);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.nav-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+.main-nav a {
+  display: block;
+  padding: 0.45rem 0.8rem;
+  border-radius: var(--radius-s);
+  color: var(--muted);
+  text-decoration: none;
+}
+.main-nav a:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+/* Every section: centered column with the same breathing room */
+main > section {
+  width: min(100% - 2rem, var(--width));
+  margin-inline: auto;
+  padding-block: var(--space-section);
+  scroll-margin-top: 4.5rem; /* stops the sticky header covering the title */
+}
+main > section + section {
+  border-top: 1px solid var(--line);
+}
+
+/* Rhythm inside simple sections (zero specificity, so it is easy to override) */
+:where(.about, .skills, .experience) > * + * {
+  margin-top: 1.25rem;
+}
+:where(.about, .skills, .experience) > h2 + * {
+  margin-top: 1.5rem;
+}
+
+/* ---------- 4. SECTIONS ---------- */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-s);
+  font: inherit;
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+.btn-primary:hover {
+  background: color-mix(in srgb, var(--accent) 85%, white);
+}
+.btn-secondary {
+  border-color: var(--line);
+  color: var(--text);
+}
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+/* Hero */
+.hero {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+  padding-block: clamp(2.5rem, 7vw, 5rem) var(--space-section);
+}
+@media (min-width: 52rem) {
+  .hero {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    gap: 4rem;
+  }
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.eyebrow {
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+.hero-text h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8vw, 5rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+}
+.hero-role {
+  color: var(--accent-text);
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  font-weight: 600;
+}
+.hero-summary {
+  max-width: 52ch;
+  color: var(--muted);
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.social-links a {
+  padding: 0.3rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.social-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+/* The one bold move: portrait with an offset gold frame */
+.hero-media {
+  justify-self: center;
+  margin: 0 14px 14px 0;
+}
+.hero-media img {
+  width: min(100%, 24rem);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--radius-l);
+  box-shadow: 14px 14px 0 var(--accent);
+}
+
+/* About */
+.about p {
+  max-width: 65ch;
+}
+
+dl.fact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+}
+div.fact {
+  padding: 1rem 1.15rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-s);
+}
+div.fact dt {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+div.fact dd {
+  font-weight: 600;
+}
+
+/* Skills */
+.skill-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 2rem 1.5rem;
+}
+.skill-group {
+  padding-top: 1rem;
+  border-top: 2px solid var(--line);
+}
+.skill-group h3 {
+  margin-bottom: 0.75rem;
+}
+.skill-group ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.skill-group li {
+  padding: 0.3rem 0.8rem;
+  background: var(--surface-2);
+  border-radius: 999px;
+  font-size: 0.95rem;
+}
+
+/* Projects */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: 1.5rem;
+}
+.projects > h2,
+.projects > .section-intro {
+  grid-column: 1 / -1;
+}
+.section-intro {
+  margin-top: -0.75rem;
+  color: var(--muted);
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1.25rem;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  transition: border-color 0.2s;
+}
+.project-card:hover {
+  border-color: var(--accent);
+}
+
+.project-media {
+  aspect-ratio: 16 / 9;
+  background: var(--surface-2);
+}
+.project-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-card > :not(.project-media) {
+  margin-inline: 1.25rem;
+}
+.project-card h3 {
+  margin-top: 1.1rem;
+}
+.project-card p {
+  margin-top: 0.6rem;
+  color: var(--muted);
+}
+
+.project-card .tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+.tech-list li {
+  padding: 0.15rem 0.65rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+/* margin-top: auto pushes the links to the bottom so all cards line up */
+.project-card .project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
+  color: var(--text);
+  font-weight: 600;
+}
+.project-links a:hover,
+.contact-details a:hover,
+.site-footer a:hover {
+  color: var(--accent-text);
+}
+
+/* Experience: a real sequence, so a timeline fits */
+.timeline {
+  margin-left: 0.5rem;
+  border-left: 2px solid var(--line);
+}
+.timeline-item {
+  position: relative;
+  padding: 0 0 2rem 1.75rem;
+}
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 0.4rem;
+  left: -1px;
+  width: 0.85rem;
+  height: 0.85rem;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  border-radius: 50%;
+  transform: translateX(-50%);
+}
+.timeline-item > * + * {
+  margin-top: 0.35rem;
+}
+.meta {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Contact: text on the left, form on the right (wide screens) */
+.contact {
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+}
+.contact h2 {
+  grid-area: title;
+}
+.contact > p {
+  grid-area: text;
+  max-width: 48ch;
+  color: var(--muted);
+}
+.contact-details {
+  grid-area: details;
+  display: grid;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+}
+.contact-form {
+  grid-area: form;
+}
+
+.contact {
+  grid-template-areas: "title" "text" "details" "form";
+}
+@media (min-width: 56rem) {
+  .contact {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-areas:
+      "title   form"
+      "text    form"
+      "details form"
+      ".       form";
+    grid-template-rows: auto auto auto 1fr;
+    column-gap: 4rem;
+  }
+}
+
+.contact-form {
+  display: grid;
+  gap: 1.1rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+}
+.field,
+.Message {
+  display: grid;
+  gap: 0.4rem;
+} /* .Message is the class in your HTML */
+.contact-form label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.contact-form :is(input, textarea) {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  color: var(--text);
+  font: inherit;
+}
+.contact-form textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+.contact-form :is(input, textarea):user-invalid {
+  border-color: var(--danger);
+}
+.contact-form .btn {
+  justify-self: start;
+  cursor: pointer;
+}
+
+/* Footer */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding-block: 1.5rem;
+  padding-inline: var(--gutter);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+}
+
+/* ---------- 6. ACCESSIBILITY ---------- */
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.contact-form :is(input, textarea):focus-visible {
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.skip-link {
+  position: absolute;
+  top: -4rem;
+  left: 1rem;
+  z-index: 20;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  border-radius: var(--radius-s);
+  color: var(--accent-ink);
+  font-weight: 700;
+  text-decoration: none;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* ---------- 5. MOTION (only if the visitor allows it) ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* One page-load moment: the hero introduces itself, line by line */
+  .hero-text > * {
+    animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .hero-text > :nth-child(2) {
+    animation-delay: 0.07s;
+  }
+  .hero-text > :nth-child(3) {
+    animation-delay: 0.14s;
+  }
+  .hero-text > :nth-child(4) {
+    animation-delay: 0.21s;
+  }
+  .hero-text > :nth-child(5) {
+    animation-delay: 0.28s;
+  }
+  .hero-text > :nth-child(6) {
+    animation-delay: 0.35s;
+  }
+  .hero-media {
+    animation: rise 0.8s 0.25s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+}

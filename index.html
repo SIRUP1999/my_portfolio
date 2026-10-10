@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Albert Ofori | Software Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Albert Ofori, a software developer who builds web and mobile apps. See projects, skills and contact details."
+    />
+    <meta name="theme-color" content="#0f172a" />
+    <link rel="icon" href="images/favicon.png" />
+
+    <!-- Sharing preview (WhatsApp, LinkedIn, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Albert Ofori | Software Developer" />
+    <meta
+      property="og:description"
+      content="Web and mobile apps, projects, skills and contact details."
+    />
+    <meta property="og:image" content="images/profile.jpg" />
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header" id="top">
+      <a class="logo" href="#home">Albert Ofori</a>
+      <nav class="main-nav" aria-label="Main">
+        <ul class="nav-list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <!-- TODO: turn this link on when you enable the Experience section below
+          <li><a href="#experience">Experience</a></li>
+          -->
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- Hero -->
+      <section class="hero" id="home" aria-labelledby="hero-title">
+        <div class="hero-text">
+          <p class="eyebrow">Hello, I'm</p>
+          <h1 id="hero-title">Albert Ofori</h1>
+          <p class="hero-role">Software Developer</p>
+          <p class="hero-summary">
+            I build web and mobile apps. I build to learn, and I build for the
+            people around me, especially my friends, so that we can use the apps
+            and have fun with them every day.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View my work</a>
+            <a
+              class="btn btn-secondary"
+              href="files/albert-ofori-cv.pdf"
+              download
+              >Download CV</a
+            >
+          </div>
+          <!-- TODO: replace your-username and your-channel with your real links -->
+          <ul class="social-links" aria-label="Social links">
+            <li>
+              <a
+                href="https://github.com/your-username"
+                target="_blank"
+                rel="noopener noreferrer"
+                >GitHub</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://linkedin.com/in/your-username"
+                target="_blank"
+                rel="noopener noreferrer"
+                >LinkedIn</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://youtube.com/@your-channel"
+                target="_blank"
+                rel="noopener noreferrer"
+                >YouTube</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <figure class="hero-media">
+          <img
+            src="images/image_of_albert.jpg"
+            alt="Portrait of Albert Ofori"
+            width="400"
+            height="400"
+          />
+        </figure>
+      </section>
+
+      <!-- About -->
+      <section class="about" id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About me</h2>
+        <p>
+          I enjoy building new things and learning all the time. I like making
+          mobile apps and websites, and I work every day towards my dream of
+          becoming a better software developer. I also want to make an impact on
+          the younger generation and help them build their own skills.
+        </p>
+        <dl class="fact">
+          <div class="fact">
+            <dt>Focus</dt>
+            <dd>Backend, web and mobile development</dd>
+          </div>
+          <div class="fact">
+            <dt>Studying</dt>
+            <dd>BSc Computer Science</dd>
+          </div>
+          <div class="fact">
+            <dt>Based in</dt>
+            <dd>Nsoatre, Ghana</dd>
+          </div>
+          <div class="fact">
+            <dt>Open to</dt>
+            <dd>Internships, junior roles and freelance work</dd>
+          </div>
+        </dl>
+      </section>
+
+      <!-- Skills -->
+      <section class="skills" id="skills" aria-labelledby="skills-title">
+        <h2 id="skills-title">Skills</h2>
+        <div class="skill-groups">
+          <div class="skill-group">
+            <h3>Frontend</h3>
+            <ul>
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>JavaScript</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Backend</h3>
+            <ul>
+              <li>Python</li>
+              <li>Django</li>
+              <li>REST APIs</li>
+              <li>Node.js</li>
+              <li>SQL</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Mobile</h3>
+            <ul>
+              <li>Dart</li>
+              <li>Flutter</li>
+              <li>React Native</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3>Tools</h3>
+            <ul>
+              <li>Git and GitHub</li>
+              <li>VS Code</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section class="projects" id="projects" aria-labelledby="projects-title">
+        <h2 id="projects-title">Projects</h2>
+        <p class="section-intro">A selection of things I have built.</p>
+
+        <article class="project-card">
+          <figure class="project-media">
+            <img
+              src="images/project-1.jpg"
+              alt="Home screen of the school management app"
+              width="640"
+              height="360"
+              loading="lazy"
+            />
+          </figure>
+          <h3>School management app</h3>
+          <p>
+            An app that lets a school keep school information, student records
+            and fee payments in one place.
+          </p>
+          <ul class="tech-list" aria-label="Technologies used">
+            <li>Node.js</li>
+            <li>MongoDB</li>
+            <li>REST API</li>
+          </ul>
+          <!-- TODO: replace both links with your real demo and repository -->
+          <p class="project-links">
+            <a
+              href="https://example.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Live demo</a
+            >
+            <a
+              href="https://github.com/your-username/project-one"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Source code</a
+            >
+          </p>
+        </article>
+
+        <article class="project-card">
+          <figure class="project-media">
+            <img
+              src="images/project-2.jpg"
+              alt="Screen of the exam timetable reminder app"
+              width="640"
+              height="360"
+              loading="lazy"
+            />
+          </figure>
+          <h3>Exam timetable reminder app</h3>
+          <p>
+            A friend of mine missed an exam because he misread the timetable,
+            and the whole class felt it. I built this app so that everyone in
+            the class gets reminders of the exam timetable and nobody misreads
+            it again.
+          </p>
+          <ul class="tech-list" aria-label="Technologies used">
+            <li>Flutter</li>
+            <li>Dart</li>
+            <li>Firebase</li>
+          </ul>
+          <!-- TODO: replace both links with your real demo and repository -->
+          <p class="project-links">
+            <a
+              href="https://example.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Live demo</a
+            >
+            <a
+              href="https://github.com/your-username/project-two"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Source code</a
+            >
+          </p>
+        </article>
+
+        <!-- TODO: add your third project here when it is ready. Copy the card above, then change the image, title, description, technologies and links.
+        <article class="project-card">
+          <figure class="project-media">
+            <img src="images/project-3.jpg" alt="Describe the screenshot" width="640" height="360" loading="lazy" />
+          </figure>
+          <h3>Project name</h3>
+          <p>Two or three sentences: the problem, what you built, and what you learned.</p>
+          <ul class="tech-list" aria-label="Technologies used">
+            <li>Tech 1</li>
+            <li>Tech 2</li>
+          </ul>
+          <p class="project-links">
+            <a href="LIVE-DEMO-URL" target="_blank" rel="noopener noreferrer">Live demo</a>
+            <a href="GITHUB-URL" target="_blank" rel="noopener noreferrer">Source code</a>
+          </p>
+        </article>
+        -->
+      </section>
+
+      <!-- TODO: enable this section when you have real experience or education to add.
+           Also enable the Experience link in the nav at the top.
+
+      <section class="experience" id="experience" aria-labelledby="experience-title">
+        <h2 id="experience-title">Experience and education</h2>
+        <ol class="timeline">
+          <li class="timeline-item">
+            <h3>BSc Computer Science</h3>
+            <p class="meta">
+              Name of your university.
+              <time datetime="2022-09">Sep 2022</time> to Present
+            </p>
+            <p>One sentence about what you study or learned there.</p>
+          </li>
+        </ol>
+      </section>
+      -->
+
+      <!-- Contact -->
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Get in touch</h2>
+        <p>
+          I'm open to internships, junior roles and freelance projects. Send me
+          a message or email me directly.
+        </p>
+        <ul class="contact-details">
+          <li>
+            <a href="mailto:albertofori009@gmail.com"
+              >albertofori009@gmail.com</a
+            >
+          </li>
+          <!-- TODO: check this number: the old code had two different numbers -->
+          <li><a href="tel:+233207729445">+233 20 772 9445</a></li>
+        </ul>
+
+        <!-- TODO: action="#" sends nothing yet. Connect the form to a service such as Formspree or Netlify Forms. -->
+        <form class="contact-form" action="#" method="post">
+          <div class="field">
+            <label for="contact-name">Your name</label>
+            <input
+              type="text"
+              id="contact-name"
+              name="name"
+              autocomplete="name"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="contact-email">Your email</label>
+            <input
+              type="email"
+              id="contact-email"
+              name="email"
+              autocomplete="email"
+              required
+            />
+          </div>
+          <div class="field">
+            <label for="contact-message">Your message</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="5"
+              minlength="10"
+              required
+            ></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit">Send message</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p><small>&copy; 2026 Albert Ofori. All rights reserved.</small></p>
+      <p><a href="#main">Back to top</a></p>
+    </footer>
+  </body>
+</html>
